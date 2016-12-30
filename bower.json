@@ -1,0 +1,20 @@
+{
+  "name": "suttor-react",
+  "description": "Suttor react app.",
+  "main": "index.js",
+  "authors": [
+    "ashutosh <ashutosh.singh@srijan.net>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ashutoshsngh/suttor-react",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-css": "^3.3.6"
+  }
+}

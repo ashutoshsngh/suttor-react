@@ -1,0 +1,34 @@
+{
+  "name": "suttor-react",
+  "version": "1.0.0",
+  "description": "Suttor react app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashutoshsngh/suttor-react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashutoshsngh/suttor-react/issues"
+  },
+  "homepage": "https://github.com/ashutoshsngh/suttor-react#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "browserify": "^13.1.1",
+    "es6-promise": "^4.0.5",
+    "express": "^4.14.0",
+    "guid": "0.0.12",
+    "gulp": "^3.9.1",
+    "jquery": "^3.1.1",
+    "mongoose": "^4.7.5",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "reactify": "^1.1.1",
+    "underscore": "^1.8.3",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
