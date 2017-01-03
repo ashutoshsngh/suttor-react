@@ -1,5 +1,8 @@
 var dispatcher = require("../dispatcher");
 var suttorService = require("../services/suttorService");
+var userService = require("../services/userService");
+var userLoginService = require("../services/userLoginService");
+var reactCookie = require("react-cookie");
 
 function SuttaStore() {
     var listeners = [];
@@ -27,6 +30,27 @@ function SuttaStore() {
         });
     }
 
+    function addUser(user) {
+        userService.addUser(user).then(function (res) {
+            triggerListeners();
+        })
+    }
+
+    function getUser(user) {
+        userService.getUser(user).then(function(res){
+            triggerListeners();
+        })
+    }
+
+    function loginUser(user) {
+        userLoginService.loginUser(user).then(function(res) {
+            var userinfo = res[0];
+            var id = userinfo._id;
+            reactCookie.save('session',id);
+            triggerListeners();
+        })
+    }
+
     function triggerListeners() {
         getSchools(function (res) {
             listeners.forEach(function (listener) {
@@ -44,6 +68,20 @@ function SuttaStore() {
                     break;
                 case "deleteSutta":
                     deleteSutta(payload.sutta);
+                    break;
+            }
+        }
+
+        if (split[0] === "user") {
+            switch (split[1]) {
+                case "addUser":
+                    addUser(payload.user);
+                    break;
+                case "removeUser":
+                    deleteUser(payload.user);
+                    break;
+                case 'loginUser':
+                    loginUser(payload.user);
                     break;
             }
         }
