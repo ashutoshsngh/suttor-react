@@ -3,17 +3,15 @@
  */
 var $ = require("jquery");
 var promise = require("es6-promise");
-var reactCookie = require("react-cookie");
-var userid = reactCookie.load("session");
-var resourceUrl = "http://localhost:7777/api/sutta";
+var resourceUrl = "http://localhost:7777/api/user/login";
 
 module.exports = {
-    addSutta: function (sutta) {
+    loginUser: function (user) {
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
                 url: resourceUrl,
-                data: JSON.stringify(sutta),
+                data: JSON.stringify(user),
                 method: "POST",
                 dataType: "json",
                 contentType: "application/json",
@@ -22,11 +20,11 @@ module.exports = {
             });
         });
     },
-    getSchools: function () {
+    getUser: function () {
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
-                url: resourceUrl + "/" + userid,
+                url: resourceUrl,
                 method: "GET",
                 dataType: "json",
                 success: resolve,
@@ -34,11 +32,11 @@ module.exports = {
             });
         });
     },
-    deleteSchool: function (school) {
+    deleteUser: function (user) {
         var Promise = promise.Promise;
         return new Promise(function (resolve, reject) {
             $.ajax({
-                url: resourceUrl + "/" + school._id,
+                url: resourceUrl + "/" + user._id,
                 method: "DELETE",
                 dataType: "json",
                 success: resolve,

@@ -1,13 +1,16 @@
 var mongoose = require("mongoose");
 var Suttor = require("../data/suttor");
+var User = require("../data/user");
 var _ = require("underscore");
 
 var router = require("express").Router();
 router.route("/sutta/:id?").get(getSchools).post(addSutta).delete(deleteSchool);
+router.route("/user/register:id?").get(getUser).post(addUser).delete(deleteUser);
+router.route("/user/login/:id?").get(loginUser1).post(loginUser).delete(deleteUser);
 
 function getSchools(req, res) {
-    Suttor.find(function (err, schools) {
-        console.log(schools);
+    var userid = req.params.id;
+    Suttor.find({userid:userid},function (err, schools) {
         if (err)
             res.send(err);
         else
@@ -33,6 +36,44 @@ function deleteSchool(req, res) {
         else
             res.json(removed);
     });
+}
+
+function getUser(req,res) {
+    User.find(function (err, user) {
+        if (err)
+            res.send(err);
+        else
+            res.json(user);
+    });
+}
+
+function addUser(req,res) {
+    var user = new User(_.extend({}, req.body));
+    user.save(function (err) {
+        if (err)
+            res.send(err);
+        else
+            res.json(user);
+    });
+}
+
+function deleteUser(req,res) {
+
+}
+
+function loginUser(req,res) {
+    var user = new User(_.extend({}, req.body));
+    User.find({email:user.email,password:user.password},function (err, user) {
+        if (err)
+            res.send(err);
+        else
+            res.json(user);
+    });
+}
+
+function loginUser1(req,res) {
+    var loginres = res[0];
+    console.log(loginres);
 }
 
 module.exports = router;

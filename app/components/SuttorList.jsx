@@ -1,10 +1,17 @@
 var React = require("react");
 var Actions = require("../actions/SuttorActions");
 var SuttorAddForm = require("./SuttorAddForm.jsx");
+var app = require('./app.jsx');
+var ReactRouter = require('react-router');
+var browserHistory = ReactRouter.browserHistory;
+var IndexRoute = ReactRouter.IndexRoute;
+var HomePage = require("./HomePage.jsx");
 
 var cols = [
     { key: '_id', label: 'Id' },
-    { key: 'suttacount', label: 'Sutta count' }
+    { key: 'suttacount', label: 'Sutta count'},
+    { key: 'amount', label:'Amount spend'},
+    { key: 'created', label:'Created date'}
 ];
 
 module.exports = React.createClass({
@@ -28,11 +35,12 @@ module.exports = React.createClass({
     generateHeaders: function() {
         // generate our header (th) cell components
         return cols.map(function(colData) {
-            return <th key={colData.key}>{colData.label}</th>;
+            return <th key={colData.key}> {colData.label} </th>;
         });
     },
     generateRows: function() {
-        return this.props.sutta.map(function(item) {
+        data = this.props.sutta;
+        return data.map(function(item) {
             // handle the column data within each row
             var cells = cols.map(function(colData) {
                 return <td>{item[colData.key]}</td>;
